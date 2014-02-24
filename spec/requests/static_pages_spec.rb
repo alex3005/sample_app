@@ -11,7 +11,11 @@ describe "Static pages" do
 
   describe "Home page" do
     before { visit root_path }
+<<<<<<< HEAD
     let(:heading) {'Welcome'}
+=======
+    let(:heading) {'Howzit'}
+>>>>>>> sign-in-out
     let(:page_title)  {''}
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }

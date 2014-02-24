@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-       flash[:success] = "Welcome to the Sample App!"
+       flash[:success] = "Thank you for signing up, " + @user.name.split.map(&:capitalize)*' ' + ".  Welcome to the Sample App!"
       redirect_to @user
     else
       render 'new'
