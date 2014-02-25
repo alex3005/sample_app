@@ -8,18 +8,29 @@ class UsersController < ApplicationController
   end
 
   def new
+   if signed_in?
+      flash[:error] = "You already have an account logged in."
+      redirect_to(root_url)
+   else 
     @user = User.new
+  end
   end
 
   def index
     @users = User.paginate(page: params[:page])
   end
 
-  def destroy
-    User.find(params[:id]).destroy
+  def destroy   
+    if !User.find(params[:id]).admin
     flash[:success] = "User destroyed."
+    User.find(params[:id]).destroy
+    redirect_to users_url
+  else
+    flash[:error] = "Cannot destory admin user."
     redirect_to users_url
   end
+  
+end
 
 
   def create
